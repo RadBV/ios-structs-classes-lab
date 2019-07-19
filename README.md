@@ -24,9 +24,19 @@ fred.name = "Brick"
 fred.weight = 999.2
 fred.homePlanet = "Mars"
 ```
+The first two lines of code will run because `fred.name` and `fred.weight` are mutable, but `fred.homePlanet` is a let constant, so the third line will give an error
 
 Fix the class definition for `Giant` in the space below so that it **does** work:
 
+```swift
+class Giant {
+    var name: String = "Fred"
+    var weight: Double = 340.0
+    var homePlanet: String = "Earth"
+}
+
+let fred = Giant()
+```
 
 ## Question 2
 
@@ -48,9 +58,11 @@ bilbo.name = "Jake"
 bilbo.height = 1.42
 bilbo.homePlanet = "Saturn"
 ```
+None of them will work because `bilbo` was declared as a let constant earlier.
 
 Change the declaration of `bilbo` so that the above three lines of code **do** work:
 
+`var bilbo = Alien(name: "Bilbo", height: 1.67, homePlanet: "Venus")`
 
 ## Question 3
 
@@ -66,6 +78,8 @@ jason.name = "Jason"
 What will the value of `edgar.name` be after those three lines of code are run? What will the value of `jason.name` be? Why?
 
 
+Both `edgar.name` and `jason.name` will both have the value `"Jason"` because since `Giant()` is a class (reference type), both `edgar` and `jason` are referencing the same source. If one of them changed the value, that value is assigned to all three of the variables. `"Jason"` was the last value it changed to.
+
 ## Question 4
 
 Given this bit of code that uses the `Alien` struct:
@@ -78,6 +92,7 @@ charlesFromJupiter.homePlanet = "Jupiter"
 
 What will the value of `charles.homePlanet` be after the above code run? What about the value of `charlesFromJupiter.homePlanet`? Why?
 
+the value of  `charles.homePlanet` is Pluto. The value of `charlesFromJupiter.homePlanet` is Jupiter.  `charlesFromJupiter.homePlanet` is not referencing the same source as  `charles.homePlanet`. It's only holding a copy of that value. Changing that variable's value will not change the value of `charles.homePlanet`.
 
 ## Question 5
 
@@ -100,8 +115,24 @@ struct BankAccount {
 
 Does this code work? Why or why not?
 
+it will not work because balance cannot be mutated since you cannot change the value of a variable within it's own structure.
+
 Fix the `BankAccount` struct so it does work.
 
+```swift
+struct BankAccount {
+    var owner: String
+    var balance: Double
+
+    mutating func deposit(_ amount: Double) {
+        balance += amount
+    }
+
+    mutating func withdraw(_ amount: Double) {
+        balance -= amount
+    }
+}
+```
 Given the code below (which should incorporate any fixes you made):
 
 ```swift
@@ -112,22 +143,86 @@ joeAccount.withdraw(50.0)
 
 What will the value of `joeAccount.balance` be after the above code runs? What about the value of `joeOtherAccount.balance`? Why?
 
+`joeAccount.balance` is still 100. `joeOtherAccount.balance` is 50, because that variable's value is separate of `joeAccount.balance`'s value.
 
 ## Question 6
 
 a. Write a struct called `Person` that has 3 properties of type `String`: a first name, a last name and a middle name. Have the middle name be optional. Create 2 instances of a `Person`, one with a middle name and one without. Print one of their first names.
 
+```swift
+struct Person {
+var firstName: String
+var middleName: String?
+var lastName: String
+}
+
+var beembo = Person(firstName: "Beembo ", middleName: "B ", lastName: "boingo")
+var hegega = Person(firstName: "Hegega ", middleName: nil , lastName: "lehjsfdf")
+print(beembo.firstName)
+```
+
 
 b. Write a method in `Person` called `fullName` that will return a formatted string of an instance's full name. Call this method on both the instances you created in part a.
 
+
+```swift
+var fullnameYEs = String()
+
+struct Person {
+    var firstName: String
+    var middleName: String?
+    var lastName: String
+
+    func fullname() -> String {
+        if let middlenameUnwrapped = self.middleName {
+            fullnameYEs = self.firstName + middlenameUnwrapped + self.lastName
+        } else {
+            fullnameYEs = self.firstName + self.lastName
+        }
+        return fullnameYEs
+    }
+}
+
+var beembo = Person(firstName: "Beembo ", middleName: "B ", lastName: "boingo ")
+var hegega = Person(firstName: "Hegega ", middleName: nil , lastName: "lehjsfdf ")
+
+var beemboFullName = beembo.fullname()
+var hegegaFullName = hegega.fullname()
+print(beemboFullName)
+print(hegegaFullName)
+```
 
 ## Question 7
 
 a. Create a struct called `Book` that has properties `title`, `author` and `rating`, of type `String`, `String`, and `Double` respectively. Create some instances of `Book`.
 
+```swift
+struct Book {
+var title: String
+var author: String
+var rating: Double
+}
+
+var endersGame = Book.init(title: "Ender's Game", author: "Orson Scott Card", rating: 7.5)
+```
 
 b. Add a method to `Book` called `isGood` that returns `true` if its rating is greater than or equal to 7
 
+```swift
+struct Book {
+    var title: String
+    var author: String
+    var rating: Double
+
+    func isGood() -> Bool {
+        if self.rating >= 7 {
+            return true
+        } else {
+            return false
+        }
+    }
+}
+```
 
 ## Question 8
 
