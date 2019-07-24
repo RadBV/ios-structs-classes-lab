@@ -9,9 +9,9 @@ Given this class that represents a giant:
 
 ```swift
 class Giant {
- var name: String = "Fred"
- var weight: Double = 340.0
- let homePlanet: String = "Earth"
+    var name: String = "Fred"
+    var weight: Double = 340.0
+    let homePlanet: String = "Earth"
 }
 
 let fred = Giant()
@@ -44,9 +44,9 @@ Take a look at this struct that represents an alien:
 
 ```swift
 struct Alien {
- var name: String
- var height: Double
- var homePlanet: String
+    var name: String
+    var height: Double
+    var homePlanet: String
 }
 let bilbo = Alien(name: "Bilbo", height: 1.67, homePlanet: "Venus")
 ```
@@ -100,16 +100,16 @@ Here's a struct that represents a bank account:
 
 ```swift
 struct BankAccount {
- var owner: String
- var balance: Double
+    var owner: String
+    var balance: Double
 
- func deposit(_ amount: Double) {
- balance += amount
- }
+    func deposit(_ amount: Double) {
+        balance += amount
+    }
 
- func withdraw(_ amount: Double) {
- balance -= amount
- }
+    func withdraw(_ amount: Double) {
+        balance -= amount
+    }
 }
 ```
 
@@ -151,9 +151,9 @@ a. Write a struct called `Person` that has 3 properties of type `String`: a firs
 
 ```swift
 struct Person {
-var firstName: String
-var middleName: String?
-var lastName: String
+    var firstName: String
+    var middleName: String?
+    var lastName: String
 }
 
 var beembo = Person(firstName: "Beembo ", middleName: "B ", lastName: "boingo")
@@ -198,9 +198,9 @@ a. Create a struct called `Book` that has properties `title`, `author` and `rati
 
 ```swift
 struct Book {
-var title: String
-var author: String
-var rating: Double
+    var title: String
+    var author: String
+    var rating: Double
 }
 
 var endersGame = Book.init(title: "Ender's Game", author: "Orson Scott Card", rating: 7.5)
